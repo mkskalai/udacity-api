@@ -49,9 +49,9 @@ class Sample(BaseModel):
 async def welcome():
     return "Hello adventurer!"
 
-@app.post("/predict/{item_id}")
-async def make_prediction(item_id: int, sample: Sample):
+@app.post("/predict/")
+async def make_prediction(sample: Sample):
     X = pd.DataFrame(sample.dict(by_alias=True), index=[0])
     X, _, _, _ = process_data(X, categorical_features=cat_features, label=None, training=False, encoder=encoder, lb=lb)
     y = inference(model, X)
-    return {item_id: float(y)}
+    return {"Prediction": int(y)}

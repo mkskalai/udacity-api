@@ -34,7 +34,7 @@ def test_api_post_0():
         }),
     )
     assert r.status_code == 200
-    assert r.json() == {"42": 0.0}
+    assert r.json() == {"Prediction": 0}
 
 
 def test_api_post_1():
@@ -58,4 +58,4 @@ def test_api_post_1():
         }),
     )
     assert r.status_code == 200
-    assert r.json() == {"24": 1.0}
+    assert r.json() == {"Prediction": 1}
