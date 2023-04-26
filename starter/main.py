@@ -51,10 +51,10 @@ async def welcome():
 
 @app.on_event("startup")
 async def startup_event(): 
-    global model, encoder, lb
+    global model, encoder, binarizer
     model = load(os.path.join(dir_path, "../starter/model/random_forest.joblib"))
     encoder = load(os.path.join(dir_path, "../starter/model/encoder.joblib"))
-    lb = load(os.path.join(dir_path, "../starter/model/lb.joblib"))
+    binarizer = load(os.path.join(dir_path, "../starter/model/lb.joblib"))
 
 @app.post("/predict/")
 async def make_prediction(sample: Sample):
