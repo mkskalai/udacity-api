@@ -15,7 +15,7 @@ def test_api_get():
 
 def test_api_post_0():
     r = client.post(
-        "/predict", 
+        "/predict/", 
         data = json.dumps({
             "age": 39,
             "workclass": "Without-pay",
@@ -39,7 +39,7 @@ def test_api_post_0():
 
 def test_api_post_1():
     r = client.post(
-        "/predict", 
+        "/predict/", 
         data = json.dumps({
             "age": 52,
             "workclass": "Private",
