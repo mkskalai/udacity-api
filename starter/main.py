@@ -12,9 +12,9 @@ from starter.ml.model import inference
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-model = load(os.path.join(dir_path, "../starter/model/random_forest.joblib"))
-encoder = load(os.path.join(dir_path, "../starter/model/encoder.joblib"))
-lb = load(os.path.join(dir_path, "../starter/model/lb.joblib"))
+model = None
+encoder = None
+lb = None
 
 cat_features = [
     "workclass",
@@ -48,6 +48,13 @@ class Sample(BaseModel):
 @app.get("/")
 async def welcome():
     return "Hello adventurer!"
+
+@app.on_event("startup")
+async def startup_event(): 
+    global model, encoder, binarizer
+    model = load(os.path.join(dir_path, "../starter/model/random_forest.joblib"))
+    encoder = load(os.path.join(dir_path, "../starter/model/encoder.joblib"))
+    binarizer = load(os.path.join(dir_path, "../starter/model/lb.joblib"))
 
 @app.post("/predict/")
 async def make_prediction(sample: Sample):
